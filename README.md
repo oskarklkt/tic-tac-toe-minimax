@@ -92,7 +92,7 @@ For open source projects, say how it is licensed.
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
 
-##Stage 1/5: Initial setup
+## Stage 1/5: Initial setup
 Description
 In this project, you'll write a game called Tic-Tac-Toe that you can play against your computer. The computer will have three levels of difficulty — easy, medium, and hard.
 

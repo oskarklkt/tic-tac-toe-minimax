@@ -1,25 +1,16 @@
 package com.griddynamics.tictactoe;
 
 public class Board {
-    private char[][] board;
+    private final char[][] board;
     public static final int SIZE = 3;
 
-    public Board(String initialState) {
-        this.init(initialState);
-    }
-
-    public void init(String initialState) {
+    public Board() {
         this.board = new char[SIZE][SIZE];
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                char c = initialState.charAt(row * 3 + col);
-                this.board[row][col] = (c == '_') ? ' ' : c;
+                this.board[row][col] = ' ';
             }
         }
-    }
-
-    public char[][] getBoard() {
-        return board;
     }
 
     public void setCellStatus(int row, int col, char symbol) {
@@ -70,6 +61,7 @@ public class Board {
     public boolean checkDraw() {
         return isBoardFullyOccupied() && !checkWin('X') && !checkWin('O');
     }
+
 
 
 }

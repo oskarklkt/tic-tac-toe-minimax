@@ -1,3 +1,8 @@
+package com.griddynamics.tictactoe;
+
+import com.griddynamics.tictactoe.Validator.GameValidator;
+import com.griddynamics.tictactoe.Validator.InputValidator;
+
 import java.util.Scanner;
 
 public class Game {
@@ -45,10 +50,10 @@ public class Game {
             int row = Integer.parseInt(parts[0]);
             int col = Integer.parseInt(parts[1]);
 
-            if (!InputValidator.validateCoordinatesRange(row, col, board)) {
+            if (!GameValidator.validateCoordinatesRange(row, col)) {
                 System.out.println("Coordinates should be from 1 to 3!");
                 System.out.print("Enter the coordinates: ");
-            } else if (!InputValidator.validateCellAvailability(row, col, board)) {
+            } else if (!GameValidator.validateCellAvailability(row, col, board)) {
                 System.out.println("This cell is occupied! Choose another one!");
                 System.out.print("Enter the coordinates: ");
             } else {
@@ -62,7 +67,7 @@ public class Game {
         int oCount = 0;
 
         for (char[] row : board.getBoard()) {
-            for (int i = 0; i < board.getSIZE(); i++) {
+            for (int i = 0; i < Board.SIZE; i++) {
                 if (row[i] == 'X') {
                     xCount++;
                 } else if (row[i] == 'O') {

@@ -1,31 +1,25 @@
+package com.griddynamics.tictactoe;
+
 public class Board {
     private char[][] board;
-    private static final int SIZE = 3;
+    public static final int SIZE = 3;
 
     public Board(String initialState) {
+        this.init(initialState);
+    }
+
+    public void init(String initialState) {
         this.board = new char[SIZE][SIZE];
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 char c = initialState.charAt(row * 3 + col);
-                if (c == '_') {
-                    this.board[row][col] = ' ';
-                } else {
-                    this.board[row][col] = c;
-                }
+                this.board[row][col] = (c == '_') ? ' ' : c;
             }
         }
     }
 
-    public int getSIZE() {
-        return SIZE;
-    }
-
     public char[][] getBoard() {
         return board;
-    }
-
-    public char getCellStatus(int row, int col) {
-        return board[row][col];
     }
 
     public void setCellStatus(int row, int col, char symbol) {

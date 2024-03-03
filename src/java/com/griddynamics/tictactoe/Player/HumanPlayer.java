@@ -1,36 +1,50 @@
 package com.griddynamics.tictactoe.Player;
 
 import com.griddynamics.tictactoe.Board;
+import com.griddynamics.tictactoe.Game.GameConstants;
+import com.griddynamics.tictactoe.InputExceptions.InputAttemptsException;
+import com.griddynamics.tictactoe.OutputMessages;
 import com.griddynamics.tictactoe.Validator.GameValidator;
 import com.griddynamics.tictactoe.Validator.InputValidator;
 
 import java.util.Scanner;
 
 public class HumanPlayer implements Player {
+
+    private static final String whiteSpacesRegex = "\\s+";
+    private static final int attemptsToProvideCorrectInput = 3;
     @Override
-    public void makeMove(Board board) {
+    public void makeMove(Board board) throws InputAttemptsException {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the coordinates: ");
+        System.out.print(OutputMessages.askForCoordinates);
+        int attemptCount = 0;
+
         while (true) {
             String input = scanner.nextLine();
-            String[] parts = input.split("\\s+");
+            String[] parts = input.split(whiteSpacesRegex);
             if (parts.length != 2 || !InputValidator.validateCoordinateInput(input)) {
-                System.out.println("You should enter numbers!");
-                System.out.print("Enter the coordinates: ");
-                continue;
-            }
-            int row = Integer.parseInt(parts[0]); // Adjust for 0-based indexing
-            int col = Integer.parseInt(parts[1]); // Adjust for 0-based indexing
+                System.out.println(OutputMessages.shouldEnterNumbers);
+                attemptCount++;
 
-            if (!GameValidator.validateCoordinatesRange(row, col)) {
-                System.out.println("Coordinates should be from 1 to 3!");
-                System.out.print("Enter the coordinates: ");
-            } else if (!GameValidator.validateCellAvailability(row, col, board)) {
-                System.out.println("This cell is occupied! Choose another one!");
-                System.out.print("Enter the coordinates: ");
             } else {
-                board.setCellStatus(row, col, 'X');
-                break;
+                int row = Integer.parseInt(parts[0]);
+                int col = Integer.parseInt(parts[1]);
+
+                if (!GameValidator.validateCoordinatesRange(row, col)) {
+                    System.out.println(OutputMessages.coordinatesOutOfBounds);
+                    attemptCount++;
+                } else if (!GameValidator.validateCellAvailability(row, col, board)) {
+                    System.out.println(OutputMessages.cellOccupied);
+                    attemptCount++;
+                } else {
+                    board.setCellStatus(row, col, GameConstants.xSign);
+                    break;
+                }
+            }
+            if (attemptCount >= attemptsToProvideCorrectInput) {
+                throw new InputAttemptsException();
+            } else {
+                System.out.print(OutputMessages.askForCoordinates);
             }
         }
     }

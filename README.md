@@ -33,7 +33,7 @@ Display the table again with the user's most recent move included.
 Output the state of the game.
 The possible states are:
 
-com.griddynamics.tictactoe.Game not finished — when no side has three in a row, but the table still has empty cells;
+com.griddynamics.tictactoe.Game.GameLogic not finished — when no side has three in a row, but the table still has empty cells;
 Draw — when no side has three in a row, and the table is complete;
 X wins — when there are three X's in a row (up, down, across, or diagonally);
 O wins — when there are three O's in a row (up, down, across, or diagonally).

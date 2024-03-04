@@ -23,12 +23,12 @@ public class ComputerPlayer implements Player {
     }
 
     public void easyMove(Board board) {
-        System.out.println(OutputMessages.easyMove);
+        System.out.println(OutputMessages.EASY_MOVE);
         Random random = new Random();
         int row = random.nextInt(Board.SIZE) + 1;
         int col = random.nextInt(Board.SIZE) + 1;
         if (GameValidator.validateCoordinatesRange(row, col) && GameValidator.validateCellAvailability(row, col, board)) {
-            board.setCellStatus(row, col, GameConstants.oSign);
+            board.setCellStatus(row, col, GameConstants.O_SIGN);
         } else {
             easyMove(board);
         }

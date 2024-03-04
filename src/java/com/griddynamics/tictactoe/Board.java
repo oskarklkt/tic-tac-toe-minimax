@@ -14,7 +14,7 @@ public class Board {
         this.board = new char[SIZE][SIZE];
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                this.board[row][col] = GameConstants.emptySign;
+                this.board[row][col] = GameConstants.EMPTY_SIGN;
             }
         }
     }
@@ -24,7 +24,7 @@ public class Board {
     }
 
     public boolean isCellEmpty(int row, int col) {
-        return board[row][col] == GameConstants.emptySign;
+        return board[row][col] == GameConstants.EMPTY_SIGN;
     }
 
     public boolean isBoardFullyOccupied() {
@@ -107,6 +107,6 @@ public class Board {
     }
 
     public boolean checkDraw() {
-        return isBoardFullyOccupied() && !checkWin(GameConstants.xSign) && !checkWin(GameConstants.oSign);
+        return isBoardFullyOccupied() && !checkWin(GameConstants.X_SIGN) && !checkWin(GameConstants.O_SIGN);
     }
 }

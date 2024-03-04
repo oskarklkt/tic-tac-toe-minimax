@@ -3,25 +3,24 @@ package com.griddynamics.tictactoe.Game;
 import com.griddynamics.tictactoe.Board;
 import com.griddynamics.tictactoe.OutputMessages;
 import com.griddynamics.tictactoe.Player.Difficulty;
-import com.griddynamics.tictactoe.InputExceptions.InputAttemptsException;
 import com.griddynamics.tictactoe.Player.*;
 
 
 
 public class GameLogic {
-    public static void main(String[] args) throws InputAttemptsException {
+    public static void main(String[] args) {
         start();
     }
 
-    public static void start() throws InputAttemptsException {
+    public static void start() {
         HumanPlayer player = new HumanPlayer();
         ComputerPlayer computer = new ComputerPlayer(Difficulty.EASY);
         Board board = new Board();
         board.printBoard();
-        while (!board.checkDraw() && !board.checkWin(GameConstants.xSign) && !board.checkWin(GameConstants.oSign)) {
+        while (!board.checkDraw() && !board.checkWin(GameConstants.X_SIGN) && !board.checkWin(GameConstants.O_SIGN)) {
             player.makeMove(board);
             board.printBoard();
-            if (!board.checkDraw() && !board.checkWin(GameConstants.xSign) && !board.checkWin(GameConstants.oSign)) {
+            if (!board.checkDraw() && !board.checkWin(GameConstants.X_SIGN) && !board.checkWin(GameConstants.O_SIGN)) {
                 computer.easyMove(board);
                 board.printBoard();
             }
@@ -30,14 +29,14 @@ public class GameLogic {
     }
 
     public static String checkGameStatus(Board board) {
-        if (board.checkWin(GameConstants.xSign)) {
-            return OutputMessages.xWins;
-        } else if (board.checkWin(GameConstants.oSign)) {
-            return OutputMessages.oWins;
+        if (board.checkWin(GameConstants.X_SIGN)) {
+            return OutputMessages.X_WINS;
+        } else if (board.checkWin(GameConstants.O_SIGN)) {
+            return OutputMessages.O_WINS;
         } else if (board.checkDraw()) {
-            return OutputMessages.draw;
+            return OutputMessages.DRAW;
         } else {
-            return OutputMessages.gameNotFinished;
+            return OutputMessages.GAME_NOT_FINISHED;
         }
     }
 }

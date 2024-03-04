@@ -5,6 +5,7 @@ import com.griddynamics.tictactoe.Board;
 public class OutputMessages {
 
     public static final String EASY_MOVE = "Making move level \"easy\"";
+    public static final String MEDIUM_MOVE = "Making move level \"medium\"";
     public static final String ASK_FOR_COORDINATES = "Enter the coordinates: ";
     public static final String SHOULD_ENTER_NUMBERS = "You should enter numbers!";
     public static final String COORDINATES_OUT_OF_BOUNDS = "Coordinates should be from 1 to %d!".formatted(Board.SIZE);

@@ -1,7 +1,6 @@
 package com.griddynamics.tictactoe.Player;
 
 import com.griddynamics.tictactoe.Board;
-import com.griddynamics.tictactoe.Game.GameConstants;
 import com.griddynamics.tictactoe.InputExceptions.InputAttemptsException;
 import com.griddynamics.tictactoe.Messages.OutputMessages;
 import com.griddynamics.tictactoe.Validator.GameValidator;
@@ -43,7 +42,7 @@ public class HumanPlayer implements Player {
                     System.out.println(OutputMessages.CELL_OCCUPIED);
                     attemptCount++;
                 } else {
-                    board.setCellStatus(row, col, GameConstants.X_SIGN);
+                    board.setCellStatus(row, col, sign);
                     break;
                 }
             }

@@ -24,12 +24,12 @@ public class Board {
     }
 
     public boolean isCellEmpty(int row, int col) {
-        return board[row][col] == GameConstants.EMPTY_SIGN;
+        return board[row - 1][col - 1] == GameConstants.EMPTY_SIGN;
     }
 
     public boolean isBoardFullyOccupied() {
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
+        for (int row = 1; row <= SIZE; row++) {
+            for (int col = 1; col <= SIZE; col++) {
                 if (isCellEmpty(row, col)) {
                     return false;
                 }
@@ -108,5 +108,9 @@ public class Board {
 
     public boolean checkDraw() {
         return isBoardFullyOccupied() && !checkWin(GameConstants.X_SIGN) && !checkWin(GameConstants.O_SIGN);
+    }
+
+    public char getCellStatus(int row, int col) {
+        return this.board[row][col];
     }
 }

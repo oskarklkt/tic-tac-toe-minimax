@@ -1,4 +1,6 @@
-package com.griddynamics.tictactoe;
+package com.griddynamics.tictactoe.Messages;
+
+import com.griddynamics.tictactoe.Board;
 
 public class OutputMessages {
 
@@ -11,6 +13,9 @@ public class OutputMessages {
     public static final String O_WINS = "O wins";
     public static final String DRAW = "Draw";
     public static final String GAME_NOT_FINISHED = "Game not finished";
+
+    public static final String ASK_FOR_COMMAND = "Input command: ";
+    public static final String BAD_PARAMETERS = "Bad parameters";
 
 
 }

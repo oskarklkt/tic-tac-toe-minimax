@@ -2,7 +2,7 @@ package com.griddynamics.tictactoe.Player;
 
 import com.griddynamics.tictactoe.Board;
 import com.griddynamics.tictactoe.Game.GameConstants;
-import com.griddynamics.tictactoe.OutputMessages;
+import com.griddynamics.tictactoe.Messages.OutputMessages;
 import com.griddynamics.tictactoe.Validator.GameValidator;
 
 import java.util.Random;
@@ -10,9 +10,11 @@ import java.util.Random;
 public class ComputerPlayer implements Player {
 
     private final Difficulty difficultyLevel;
+    public final char sign;
 
-    public ComputerPlayer(Difficulty difficultyLevel) {
+    public ComputerPlayer(Difficulty difficultyLevel, char sign) {
         this.difficultyLevel = difficultyLevel;
+        this.sign = sign;
     }
 
     @Override

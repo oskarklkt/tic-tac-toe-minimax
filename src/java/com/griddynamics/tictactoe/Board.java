@@ -1,25 +1,22 @@
 package com.griddynamics.tictactoe;
 
+import com.griddynamics.tictactoe.Game.GameConstants;
+
 public class Board {
     private char[][] board;
     public static final int SIZE = 3;
 
-    public Board(String initialState) {
-        this.init(initialState);
+    public Board() {
+        init();
     }
 
-    public void init(String initialState) {
+    public void init() {
         this.board = new char[SIZE][SIZE];
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                char c = initialState.charAt(row * 3 + col);
-                this.board[row][col] = (c == '_') ? ' ' : c;
+                this.board[row][col] = GameConstants.EMPTY_SIGN;
             }
         }
-    }
-
-    public char[][] getBoard() {
-        return board;
     }
 
     public void setCellStatus(int row, int col, char symbol) {
@@ -27,7 +24,7 @@ public class Board {
     }
 
     public boolean isCellEmpty(int row, int col) {
-        return board[row][col] == ' ';
+        return board[row][col] == GameConstants.EMPTY_SIGN;
     }
 
     public boolean isBoardFullyOccupied() {
@@ -42,34 +39,74 @@ public class Board {
     }
 
     public void printBoard() {
-        System.out.println("---------");
-        for (char[] row : board) {
-            System.out.println("| " + row[0] + " " + row[1] + " " + row[2] + " |");
+        for (int i = 0; i < 3 * Board.SIZE; i++) {
+            System.out.print('-');
         }
-        System.out.println("---------");
+        System.out.println();
+        for (char[] row : board) {
+            System.out.print("| ");
+            for (char cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println("|");
+        }
+        for (int i = 0; i < 3 * Board.SIZE; i++) {
+            System.out.print('-');
+        }
+        System.out.println();
     }
 
     public boolean checkWin(char symbol) {
-        for (char[] row : board) {
-            if (row[0] == row[1] && row[1] == row[2] && row[2] == symbol) {
-                return true;
+        return checkWinRow(symbol) || checkWinColumn(symbol) || checkWinDiagonal(symbol) ||checkWinAntiDiagonal(symbol);
+    }
+
+    private boolean checkWinRow(char symbol) {
+        for (int i = 0; i < Board.SIZE; i++) {
+            boolean winRow = true;
+            for (int j = 0; j < Board.SIZE; j++) {
+                if (board[i][j] != symbol) {
+                    winRow = false;
+                    break;
+                }
+            }
+            if (winRow) return true;
+        }
+        return false;
+    }
+
+    private boolean checkWinColumn(char symbol) {
+        for (int i = 0; i < Board.SIZE; i++) {
+            boolean winCol = true;
+            for (int j = 0; j < Board.SIZE; j++) {
+                if (board[j][i] != symbol) {
+                    winCol = false;
+                    break;
+                }
+            }
+            if (winCol) return true;
+        }
+        return false;
+    }
+
+    private boolean checkWinDiagonal(char symbol) {
+        for (int i = 0; i < Board.SIZE; i++) {
+            if (board[i][i] != symbol) {
+                return false;
             }
         }
+        return true;
+    }
 
-        for (int i = 0; i < SIZE; i++) {
-            if (board[0][i] == symbol &&  board[1][i] == symbol && board[2][i] == symbol) {
-                return true;
+    private boolean checkWinAntiDiagonal(char symbol) {
+        for (int i = 0; i < Board.SIZE; i++) {
+            if (board[i][Board.SIZE - i - 1] != symbol) {
+                return false;
             }
         }
-
-        return board[1][1] == symbol &&
-                ((board[0][0] == symbol && board[2][2] == symbol) ||
-                        (board[0][2] == symbol && board[2][0] == symbol));
+        return true;
     }
 
     public boolean checkDraw() {
-        return isBoardFullyOccupied() && !checkWin('X') && !checkWin('O');
+        return isBoardFullyOccupied() && !checkWin(GameConstants.X_SIGN) && !checkWin(GameConstants.O_SIGN);
     }
-
-
 }

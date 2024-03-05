@@ -1,6 +1,6 @@
-package com.griddynamics.tictactoe.Messages;
+package com.griddynamics.tictactoe.messages;
 
-import com.griddynamics.tictactoe.Board;
+import com.griddynamics.tictactoe.board.Board;
 
 public class OutputMessages {
 
@@ -17,6 +17,12 @@ public class OutputMessages {
 
     public static final String ASK_FOR_COMMAND = "Input command: ";
     public static final String BAD_PARAMETERS = "Bad parameters";
+
+    public static final String ASK_FOR_BOARD_SIZE = "Input Board's size: ";
+
+    public static final String INDEX_OUT_OF_BOUNDS = "Those coordinates are out of bounds for board of size %d".formatted(Board.SIZE);
+
+
 
 
 }

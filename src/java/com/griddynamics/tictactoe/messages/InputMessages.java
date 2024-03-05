@@ -1,4 +1,4 @@
-package com.griddynamics.tictactoe.Messages;
+package com.griddynamics.tictactoe.messages;
 
 public class InputMessages {
     public static final String EASY = "easy";

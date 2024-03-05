@@ -1,12 +1,12 @@
-package com.griddynamics.tictactoe.Player;
+package com.griddynamics.tictactoe.player;
 
-import com.griddynamics.tictactoe.Board;
-import com.griddynamics.tictactoe.Messages.OutputMessages;
-import com.griddynamics.tictactoe.Validator.GameValidator;
+import com.griddynamics.tictactoe.board.Board;
+import com.griddynamics.tictactoe.messages.OutputMessages;
+import com.griddynamics.tictactoe.validator.GameValidator;
 
 import java.util.Random;
 
-import static com.griddynamics.tictactoe.Game.GameConstants.*;
+import static com.griddynamics.tictactoe.game.GameConstants.*;
 
 public class ComputerPlayer implements Player {
 
@@ -26,7 +26,7 @@ public class ComputerPlayer implements Player {
         if (this.difficultyLevel == Difficulty.EASY) {
             easyMove(board);
         } else if (this.difficultyLevel == Difficulty.MEDIUM) {
-            if (!mediumMove(board)) {
+            if (!isPossibleMediumMove(board)) {
                 randomMove(board);
             }
         }
@@ -49,19 +49,26 @@ public class ComputerPlayer implements Player {
     }
 
 
-    private boolean checkRow(Board board, char playerSign, int row) {
+    private boolean isPossibleMoveColumnOrRow(Board board, char playerSign, int index, boolean checkRow) {
         int count = 0;
-        for (int col = 0; col < Board.SIZE; col++) {
-            if (board.getCellStatus(row, col) == playerSign) {
+        for (int i = 0; i < Board.SIZE; i++) {
+            char cellStatus = checkRow ? board.getCellStatus(index, i) : board.getCellStatus(i, index);
+            if (cellStatus == playerSign) {
                 count++;
-            } else if (board.getCellStatus(row, col) != EMPTY_SIGN) {
+            } else if (cellStatus != EMPTY_SIGN) {
                 return false;
             }
         }
+
         if (count == Board.SIZE - 1) {
-            for (int col = 0; col < Board.SIZE; col++) {
-                if (board.getCellStatus(row, col) == EMPTY_SIGN) {
-                    board.setCellStatus(row + 1, col + 1, sign);
+            for (int i = 0; i < Board.SIZE; i++) {
+                char cellStatus = checkRow ? board.getCellStatus(index, i) : board.getCellStatus(i, index);
+                if (cellStatus == EMPTY_SIGN) {
+                    if (checkRow) {
+                        board.setCellStatus(index + 1, i + 1, sign);
+                    } else {
+                        board.setCellStatus(i + 1, index + 1, sign);
+                    }
                     return true;
                 }
             }
@@ -69,27 +76,7 @@ public class ComputerPlayer implements Player {
         return false;
     }
 
-    private boolean checkColumn(Board board, char playerSign, int col) {
-        int count = 0;
-        for (int row = 0; row < Board.SIZE; row++) {
-            if (board.getCellStatus(row, col) == playerSign) {
-                count++;
-            } else if (board.getCellStatus(row, col) != EMPTY_SIGN) {
-                return false;
-            }
-        }
-        if (count == Board.SIZE - 1) {
-            for (int row = 0; row < Board.SIZE; row++) {
-                if (board.getCellStatus(row, col) == EMPTY_SIGN) {
-                    board.setCellStatus(row + 1, col + 1, sign);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean checkMainDiagonal(Board board, char playerSign) {
+    private boolean isPossibleMoveMainDiagonal(Board board, char playerSign) {
         int count = 0;
         for (int i = 0; i < Board.SIZE; i++) {
             if (board.getCellStatus(i, i) == playerSign) {
@@ -109,7 +96,7 @@ public class ComputerPlayer implements Player {
         return false;
     }
 
-    private boolean checkAntiDiagonal(Board board, char playerSign) {
+    private boolean isPossibleMoveAntiDiagonal(Board board, char playerSign) {
         int count = 0;
         for (int i = 0; i < Board.SIZE; i++) {
             if (board.getCellStatus(i, Board.SIZE - 1 - i) == playerSign) {
@@ -129,29 +116,26 @@ public class ComputerPlayer implements Player {
         return false;
     }
 
-    private boolean tryWin(Board board) {
+    private boolean isPossibleWin(Board board) {
         for (int i = 0; i < Board.SIZE; i++) {
-            if (checkRow(board, sign, i) || checkColumn(board, sign, i)) {
+            if (isPossibleMoveColumnOrRow(board, sign, i, true) || isPossibleMoveColumnOrRow(board, sign, i, false)) {
                 return true;
             }
         }
-        return checkMainDiagonal(board, sign) || checkAntiDiagonal(board, sign);
+        return isPossibleMoveMainDiagonal(board, sign) || isPossibleMoveAntiDiagonal(board, sign);
     }
 
-    private boolean tryBlock(Board board) {
+    private boolean isPossibleBlock(Board board) {
         for (int i = 0; i < Board.SIZE; i++) {
-            if (checkRow(board, oppositeSign, i) || checkColumn(board, oppositeSign, i)) {
+            if (isPossibleMoveColumnOrRow(board, oppositeSign, i, true) || isPossibleMoveColumnOrRow(board, oppositeSign, i, false)) {
                 return true;
             }
         }
-        return checkMainDiagonal(board, oppositeSign) || checkAntiDiagonal(board, oppositeSign);
+        return isPossibleMoveMainDiagonal(board, oppositeSign) || isPossibleMoveAntiDiagonal(board, oppositeSign);
     }
 
-    private boolean mediumMove(Board board) {
+    private boolean isPossibleMediumMove(Board board) {
         System.out.println(OutputMessages.MEDIUM_MOVE);
-        return tryWin(board) || tryBlock(board);
+        return isPossibleWin(board) || isPossibleBlock(board);
     }
-
-
-
 }

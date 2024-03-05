@@ -1,6 +1,6 @@
-package com.griddynamics.tictactoe.Validator;
+package com.griddynamics.tictactoe.validator;
 
-import com.griddynamics.tictactoe.Board;
+import com.griddynamics.tictactoe.board.Board;
 
 public class GameValidator {
     public static boolean validateCellAvailability(int row, int col, Board board) {

@@ -10,7 +10,17 @@ import static com.griddynamics.tictactoe.messages.InputMessages.*;
 import static com.griddynamics.tictactoe.messages.OutputMessages.*;
 
 
-public class GameLogic {
+public class Game {
+
+    private final Player player1;
+    private final Player player2;
+    private final Board board;
+
+    public Game(Player player1, Player player2, Board board) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.board = board;
+    }
 
     public static void main(String[] args) {
         start();
@@ -20,33 +30,35 @@ public class GameLogic {
         System.out.print(ASK_FOR_COMMAND);
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
+
         if (!InputValidator.validateInputCommand(command)) {
             System.out.println(BAD_PARAMETERS);
             start();
-        }
-        String[] commandParts = command.split(WHITESPACE);
-        if (command.split(WHITESPACE)[0].equals(EXIT)) {
             return;
         }
+
+        String[] commandParts = command.split(WHITESPACE);
+        if (commandParts[0].equals(EXIT)) {
+            return;
+        }
+
         System.out.print(ASK_FOR_BOARD_SIZE);
         int size = scanner.nextInt();
-        if (InputValidator.validateInputSize(size)) {
-            Board board = getBoard(commandParts, size);
-            System.out.println(Board.checkGameStatus(board));
-            System.out.println();
-            start();
-        } else {
+        scanner.nextLine();
+
+        if (!InputValidator.validateInputSize(size)) {
             throw new InputSizeException();
         }
 
+        Game game = new GameBuilder()
+                .setPlayer1(commandParts[1], X_SIGN)
+                .setPlayer2(commandParts[2], O_SIGN)
+                .setSize(size)
+                .build();
+        game.play();
     }
 
-    private static Board getBoard(String[] commandParts, int size) {
-        PlayerFactory playerFactory = new PlayerFactory();
-        Player player1 = playerFactory.createPlayer(commandParts[1], X_SIGN);
-        Player player2 = playerFactory.createPlayer(commandParts[2], O_SIGN);
-        Board.SIZE = size;
-        Board board = new Board();
+    public void play() {
         board.printBoard();
         while (!board.isDraw() && !board.isWin(X_SIGN) && !board.isWin(O_SIGN)) {
             player1.makeMove(board);
@@ -56,6 +68,6 @@ public class GameLogic {
                 board.printBoard();
             }
         }
-        return board;
+        System.out.println(Board.checkGameStatus(board));
     }
 }

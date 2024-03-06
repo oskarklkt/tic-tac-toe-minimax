@@ -4,6 +4,7 @@ import com.griddynamics.tictactoe.game.GameConstants;
 import com.griddynamics.tictactoe.messages.OutputMessages;
 import com.griddynamics.tictactoe.validator.GameValidator;
 
+import static com.griddynamics.tictactoe.game.GameConstants.EMPTY_SIGN;
 import static com.griddynamics.tictactoe.game.GameConstants.X_SIGN;
 
 public class Board {
@@ -131,5 +132,9 @@ public class Board {
         } else {
             return OutputMessages.GAME_NOT_FINISHED;
         }
+    }
+
+    public void clearCell(int row, int col) {
+        board[row][col] = EMPTY_SIGN;
     }
 }

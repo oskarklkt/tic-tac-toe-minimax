@@ -29,6 +29,8 @@ public class ComputerPlayer implements Player {
             if (!isPossibleMediumMove(board)) {
                 randomMove(board);
             }
+        } else if (this.difficultyLevel == Difficulty.HARD) {
+            hardMove(board);
         }
     }
 
@@ -137,5 +139,72 @@ public class ComputerPlayer implements Player {
     private boolean isPossibleMediumMove(Board board) {
         System.out.println(OutputMessages.MEDIUM_MOVE);
         return isPossibleWin(board) || isPossibleBlock(board);
+    }
+
+    public int minimax(Board board, boolean isMaximizing, int alpha, int beta) {
+        if (board.isWin(sign)) {
+            return 1;
+        } else if (board.isWin(oppositeSign)) {
+            return -1;
+        } else if (board.isDraw()){
+            return 0;
+        }
+
+        int bestScore;
+        if (isMaximizing) {
+            bestScore = Integer.MIN_VALUE;
+            outer: for (int i = 0; i < Board.SIZE; i++) {
+                for (int j = 0; j < Board.SIZE; j++) {
+                    if (board.getCellStatus(i, j) == EMPTY_SIGN) {
+                        board.setCellStatus(i + 1, j + 1, sign);
+                        int score = minimax(board, false, alpha, beta);
+                        board.clearCell(i, j);
+                        bestScore = Math.max(score, bestScore);
+                        alpha = Math.max(bestScore, alpha);
+                        if (beta <= alpha) {
+                            break outer;
+                        }
+                    }
+                }
+            }
+        } else {
+            bestScore = Integer.MAX_VALUE;
+            outer: for (int i = 0; i < Board.SIZE; i++) {
+                for (int j = 0; j < Board.SIZE; j++) {
+                    if (board.getCellStatus(i, j) == EMPTY_SIGN) {
+                        board.setCellStatus(i + 1, j + 1, oppositeSign);
+                        int score = minimax(board, true, alpha, beta);
+                        board.clearCell(i, j);
+                        bestScore = Math.min(score, bestScore);
+                        beta = Math.min(bestScore, beta);
+                        if (beta <= alpha) {
+                            break outer;
+                        }
+                    }
+                }
+            }
+        }
+        return bestScore;
+    }
+
+    public void hardMove(Board board) {
+        System.out.println(OutputMessages.HARD_MOVE);
+        int bestScore = Integer.MIN_VALUE;
+        int[] move = new int[2];
+        for (int i = 0; i < Board.SIZE; i++) {
+            for (int j = 0; j < Board.SIZE; j++) {
+                if (board.getCellStatus(i, j) == EMPTY_SIGN) {
+                    board.setCellStatus(i + 1, j + 1, sign);
+                    int score = minimax(board, false, Integer.MIN_VALUE, Integer.MAX_VALUE);
+                    board.clearCell(i, j);
+                    if (score > bestScore) {
+                        bestScore = score;
+                        move[0] = i + 1;
+                        move[1] = j + 1;
+                    }
+                }
+            }
+        }
+        board.setCellStatus(move[0], move[1], sign);
     }
 }

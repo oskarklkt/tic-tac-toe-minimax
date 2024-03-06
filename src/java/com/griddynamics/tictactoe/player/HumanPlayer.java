@@ -1,18 +1,18 @@
-package com.griddynamics.tictactoe.Player;
+package com.griddynamics.tictactoe.player;
 
-import com.griddynamics.tictactoe.Board;
-import com.griddynamics.tictactoe.Game.GameConstants;
-import com.griddynamics.tictactoe.InputExceptions.InputAttemptsException;
-import com.griddynamics.tictactoe.OutputMessages;
-import com.griddynamics.tictactoe.Validator.GameValidator;
-import com.griddynamics.tictactoe.Validator.InputValidator;
+import com.griddynamics.tictactoe.board.Board;
+import com.griddynamics.tictactoe.exceptions.InputAttemptsException;
+import com.griddynamics.tictactoe.messages.OutputMessages;
+import com.griddynamics.tictactoe.validator.GameValidator;
+import com.griddynamics.tictactoe.validator.InputValidator;
 
 import java.util.Scanner;
 
-public class HumanPlayer implements Player {
+public record HumanPlayer(char sign) implements Player {
 
     private static final String whiteSpacesRegex = "\\s+";
     private static final int attemptsToProvideCorrectInput = 3;
+
     @Override
     public void makeMove(Board board) {
         Scanner scanner = new Scanner(System.in);
@@ -37,7 +37,7 @@ public class HumanPlayer implements Player {
                     System.out.println(OutputMessages.CELL_OCCUPIED);
                     attemptCount++;
                 } else {
-                    board.setCellStatus(row, col, GameConstants.X_SIGN);
+                    board.setCellStatus(row, col, sign);
                     break;
                 }
             }

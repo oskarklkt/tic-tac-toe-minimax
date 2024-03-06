@@ -33,7 +33,7 @@ Display the table again with the user's most recent move included.
 Output the state of the game.
 The possible states are:
 
-com.griddynamics.tictactoe.Game.GameLogic not finished — when no side has three in a row, but the table still has empty cells;
+com.griddynamics.tictactoe.game.Game not finished — when no side has three in a row, but the table still has empty cells;
 Draw — when no side has three in a row, and the table is complete;
 X wins — when there are three X's in a row (up, down, across, or diagonally);
 O wins — when there are three O's in a row (up, down, across, or diagonally).
@@ -55,3 +55,34 @@ The user plays first as X, and the program should ask the user to enter cell coo
 Next, the computer makes its move as O, and the players then move in turn until someone wins or the game results in a draw.
 Print the final outcome at the very end of the game.
 
+## Stage 3/5: Watch 'em fight
+Description
+It's time to make things more interesting by adding some game variations. What if you want to play against a friend instead of the AI? How about if you get tired of playing the game and want to see a match between two AIs? You also need to give the user the option of going first or second when playing against the AI.
+
+It should be possible for the user to quit the game after the result is displayed as well.
+
+Objectives
+Your tasks for this stage are:
+
+Write a menu loop, which can interpret two commands: start and exit.
+Implement the command start. It should take two parameters: who will play X and who will play O. Two options are possible for now: user to play as a human, and easy to play as an AI.
+The exit command should simply end the program.
+In later steps, you will add the medium and hard levels.
+
+Don't forget to handle incorrect input! The message Bad parameters! should be displayed if what the user enters is invalid.
+
+## Stage 4/5: Signs of intelligence
+Description
+Let's write the medium difficulty level now. To do this, we need to add awareness to our AI.
+
+This level will be a lot harder to beat than easy, even though the initial moves are still random. When the AI is playing at medium level, it wins when it can because of its first rule, and stops all simple attempts to beat it due to its second.
+
+You can see these rules below.
+
+Objectives
+When the AI is playing at medium difficulty level, it makes moves using the following logic:
+
+If it already has two in a row and can win with one further move, it does so.
+If its opponent can win with one move, it plays the move necessary to block this.
+Otherwise, it makes a random move.
+You should add a medium parameter so that you can play against this level. It should also be possible to make AIs using easy and medium levels play against each other!

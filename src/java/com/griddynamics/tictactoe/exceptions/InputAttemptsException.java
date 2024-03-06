@@ -1,4 +1,4 @@
-package com.griddynamics.tictactoe.InputExceptions;
+package com.griddynamics.tictactoe.exceptions;
 
 public class InputAttemptsException extends RuntimeException {
 

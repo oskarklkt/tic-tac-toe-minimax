@@ -1,4 +1,4 @@
-package com.griddynamics.tictactoe.Game;
+package com.griddynamics.tictactoe.game;
 
 public class GameConstants {
     public static final char X_SIGN = 'X';

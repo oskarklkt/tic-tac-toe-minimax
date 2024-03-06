@@ -1,10 +1,14 @@
-package com.griddynamics.tictactoe;
+package com.griddynamics.tictactoe.board;
 
-import com.griddynamics.tictactoe.Game.GameConstants;
+import com.griddynamics.tictactoe.game.GameConstants;
+import com.griddynamics.tictactoe.messages.OutputMessages;
+import com.griddynamics.tictactoe.validator.GameValidator;
+
+import static com.griddynamics.tictactoe.game.GameConstants.X_SIGN;
 
 public class Board {
     private char[][] board;
-    public static final int SIZE = 3;
+    public static int SIZE;
 
     public Board() {
         init();
@@ -18,18 +22,17 @@ public class Board {
             }
         }
     }
-
     public void setCellStatus(int row, int col, char symbol) {
         board[row - 1][col - 1] = symbol;
     }
 
     public boolean isCellEmpty(int row, int col) {
-        return board[row][col] == GameConstants.EMPTY_SIGN;
+        return board[row - 1][col - 1] == GameConstants.EMPTY_SIGN;
     }
 
     public boolean isBoardFullyOccupied() {
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
+        for (int row = 1; row <= SIZE; row++) {
+            for (int col = 1; col <= SIZE; col++) {
                 if (isCellEmpty(row, col)) {
                     return false;
                 }
@@ -56,11 +59,11 @@ public class Board {
         System.out.println();
     }
 
-    public boolean checkWin(char symbol) {
-        return checkWinRow(symbol) || checkWinColumn(symbol) || checkWinDiagonal(symbol) ||checkWinAntiDiagonal(symbol);
+    public boolean isWin(char symbol) {
+        return isWinRow(symbol) || isWinColumn(symbol) || isWinDiagonal(symbol) || isWinAntiDiagonal(symbol);
     }
 
-    private boolean checkWinRow(char symbol) {
+    private boolean isWinRow(char symbol) {
         for (int i = 0; i < Board.SIZE; i++) {
             boolean winRow = true;
             for (int j = 0; j < Board.SIZE; j++) {
@@ -74,7 +77,7 @@ public class Board {
         return false;
     }
 
-    private boolean checkWinColumn(char symbol) {
+    private boolean isWinColumn(char symbol) {
         for (int i = 0; i < Board.SIZE; i++) {
             boolean winCol = true;
             for (int j = 0; j < Board.SIZE; j++) {
@@ -88,7 +91,7 @@ public class Board {
         return false;
     }
 
-    private boolean checkWinDiagonal(char symbol) {
+    private boolean isWinDiagonal(char symbol) {
         for (int i = 0; i < Board.SIZE; i++) {
             if (board[i][i] != symbol) {
                 return false;
@@ -97,7 +100,7 @@ public class Board {
         return true;
     }
 
-    private boolean checkWinAntiDiagonal(char symbol) {
+    private boolean isWinAntiDiagonal(char symbol) {
         for (int i = 0; i < Board.SIZE; i++) {
             if (board[i][Board.SIZE - i - 1] != symbol) {
                 return false;
@@ -106,7 +109,27 @@ public class Board {
         return true;
     }
 
-    public boolean checkDraw() {
-        return isBoardFullyOccupied() && !checkWin(GameConstants.X_SIGN) && !checkWin(GameConstants.O_SIGN);
+    public boolean isDraw() {
+        return isBoardFullyOccupied() && !isWin(GameConstants.X_SIGN) && !isWin(GameConstants.O_SIGN);
+    }
+
+    public char getCellStatus(int row, int col) {
+        if (GameValidator.validateCoordinatesRange(row, col)) {
+            return this.board[row][col];
+        } else {
+            throw new IndexOutOfBoundsException(OutputMessages.INDEX_OUT_OF_BOUNDS);
+        }
+    }
+
+    public static String checkGameStatus(Board board) {
+        if (board.isWin(X_SIGN)) {
+            return OutputMessages.X_WINS;
+        } else if (board.isWin(GameConstants.O_SIGN)) {
+            return OutputMessages.O_WINS;
+        } else if (board.isDraw()) {
+            return OutputMessages.DRAW;
+        } else {
+            return OutputMessages.GAME_NOT_FINISHED;
+        }
     }
 }

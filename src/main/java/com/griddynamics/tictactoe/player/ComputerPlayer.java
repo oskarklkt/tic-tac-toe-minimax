@@ -215,4 +215,5 @@ public class ComputerPlayer implements Player {
     }
     board.setCellStatus(move[0], move[1], sign);
   }
+
 }

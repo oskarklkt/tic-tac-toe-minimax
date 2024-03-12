@@ -120,9 +120,7 @@ public class Board {
   public char getCellStatus(int row, int col) {
     if (GameValidator.validateCoordinatesRange(row, col)) {
       return this.board[row][col];
-    } else {
-      throw new IndexOutOfBoundsException(OutputMessages.INDEX_OUT_OF_BOUNDS);
-    }
+    } else {throw new IndexOutOfBoundsException(OutputMessages.INDEX_OUT_OF_BOUNDS);}
   }
 
   public static String checkGameStatus(Board board) {

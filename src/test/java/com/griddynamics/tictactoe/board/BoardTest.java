@@ -128,4 +128,16 @@ class BoardTest {
         board.clearCell(1,1);
         assertEquals(GameConstants.EMPTY_SIGN ,board.getCellStatus(1,1));
     }
+
+    @Test
+    void printBoardTest() {
+        String pattern =
+                """
+                        ---------
+                        |       |
+                        |       |
+                        |       |
+                        ---------""";
+        assertEquals(pattern, board.printBoard());
+    }
 }

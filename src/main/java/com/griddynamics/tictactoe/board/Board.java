@@ -42,22 +42,30 @@ public class Board {
     return true;
   }
 
-  public void printBoard() {
+  public String printBoard() {
+    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < 3 * Board.SIZE; i++) {
+      sb.append('-');
       System.out.print('-');
     }
     System.out.println();
+    sb.append('\n');
     for (char[] row : board) {
       System.out.print("| ");
+      sb.append("| ");
       for (char cell : row) {
         System.out.print(cell + " ");
+        sb.append(cell).append(" ");
       }
       System.out.println("|");
+      sb.append("|").append("\n");
     }
     for (int i = 0; i < 3 * Board.SIZE; i++) {
       System.out.print('-');
+      sb.append('-');
     }
     System.out.println();
+    return sb.toString();
   }
 
   public boolean isWin(char symbol) {

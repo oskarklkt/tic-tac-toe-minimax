@@ -16,6 +16,11 @@ public record HumanPlayer(char sign) implements Player {
   private static final int attemptsToProvideCorrectInput = 3;
 
   @Override
+  public char getSign() {
+    return sign;
+  }
+
+  @Override
   public void makeMove(Board board) {
     Scanner scanner = new Scanner(System.in);
     log.info(OutputMessages.ASK_FOR_COORDINATES);

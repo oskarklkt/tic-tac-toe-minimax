@@ -3,6 +3,7 @@ package com.griddynamics.tictactoe.player;
 import com.griddynamics.tictactoe.board.Board;
 import com.griddynamics.tictactoe.messages.OutputMessages;
 import com.griddynamics.tictactoe.validator.GameValidator;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
@@ -13,14 +14,20 @@ import static com.griddynamics.tictactoe.game.GameConstants.*;
 public class ComputerPlayer implements Player {
 
   private final Difficulty difficultyLevel;
+  @Getter
   public final char sign;
 
+  @Getter
   public final char oppositeSign;
 
   public ComputerPlayer(Difficulty difficultyLevel, char sign) {
     this.difficultyLevel = difficultyLevel;
     this.sign = sign;
     this.oppositeSign = sign == X_SIGN ? O_SIGN : X_SIGN;
+  }
+
+  public Difficulty getDifficulty() {
+    return difficultyLevel;
   }
 
   @Override

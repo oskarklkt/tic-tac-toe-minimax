@@ -48,7 +48,7 @@ public class ComputerPlayer implements Player {
     randomMove(board);
   }
 
-  private void randomMove(Board board) {
+  public void randomMove(Board board) {
     Random random = new Random();
     int row = random.nextInt(Board.SIZE) + 1;
     int col = random.nextInt(Board.SIZE) + 1;
@@ -88,7 +88,7 @@ public class ComputerPlayer implements Player {
     return false;
   }
 
-  private boolean isPossibleMoveMainDiagonal(Board board, char playerSign) {
+  boolean isPossibleMoveMainDiagonal(Board board, char playerSign) {
     int count = 0;
     for (int i = 0; i < Board.SIZE; i++) {
       if (board.getCellStatus(i, i) == playerSign) {
@@ -108,7 +108,7 @@ public class ComputerPlayer implements Player {
     return false;
   }
 
-  private boolean isPossibleMoveAntiDiagonal(Board board, char playerSign) {
+  public boolean isPossibleMoveAntiDiagonal(Board board, char playerSign) {
     int count = 0;
     for (int i = 0; i < Board.SIZE; i++) {
       if (board.getCellStatus(i, Board.SIZE - 1 - i) == playerSign) {
@@ -138,7 +138,7 @@ public class ComputerPlayer implements Player {
     return isPossibleMoveMainDiagonal(board, sign) || isPossibleMoveAntiDiagonal(board, sign);
   }
 
-  private boolean isPossibleBlock(Board board) {
+  public boolean isPossibleBlock(Board board) {
     for (int i = 0; i < Board.SIZE; i++) {
       if (isPossibleMoveColumnOrRow(board, oppositeSign, i, true)
           || isPossibleMoveColumnOrRow(board, oppositeSign, i, false)) {

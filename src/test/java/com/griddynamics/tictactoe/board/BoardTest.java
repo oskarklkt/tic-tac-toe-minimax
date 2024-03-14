@@ -29,7 +29,9 @@ class BoardTest {
 
     @Test
     void setCellStatusTest() {
+        //given
         board.setCellStatus(1,1, GameConstants.O_SIGN);
+        //then
         assertEquals(GameConstants.O_SIGN, board.getCellStatus(0, 0));
         assertThrows(IndexOutOfBoundsException.class, () -> board.getCellStatus(10, 10));
     }
@@ -37,13 +39,16 @@ class BoardTest {
     @Test
     void isCellEmptyTest() {
         assertTrue(board.isCellEmpty(1,1));
+        //given
         board.setCellStatus(2,2, GameConstants.X_SIGN);
+        //then
         assertFalse(board.isCellEmpty(2, 2));
     }
 
     @Test
     void isBoardFullyOccupiedTest() {
         assertFalse(board.isBoardFullyOccupied());
+        //given
         board.setCellStatus(1, 1, GameConstants.O_SIGN);
         board.setCellStatus(1, 2, GameConstants.O_SIGN);
         board.setCellStatus(1, 3, GameConstants.X_SIGN);
@@ -53,6 +58,7 @@ class BoardTest {
         board.setCellStatus(3, 1, GameConstants.X_SIGN);
         board.setCellStatus(3, 2, GameConstants.X_SIGN);
         board.setCellStatus(3, 3, GameConstants.O_SIGN);
+        //then
         assertTrue(board.isBoardFullyOccupied());
     }
 
@@ -60,20 +66,26 @@ class BoardTest {
     void isWinTest() {
         assertFalse(board.isWin(GameConstants.X_SIGN));
         assertFalse(board.isWin(GameConstants.O_SIGN));
+        //given
         Board boardWinX = new Board();
         boardWinX.setCellStatus(1,1, GameConstants.X_SIGN );
         boardWinX.setCellStatus(1,2, GameConstants.X_SIGN );
         boardWinX.setCellStatus(1,3, GameConstants.X_SIGN );
+        //then
         assertTrue(boardWinX.isWin(GameConstants.X_SIGN));
+        //given
         Board boardWinO = new Board();
         boardWinO.setCellStatus(1,1, GameConstants.O_SIGN );
         boardWinO.setCellStatus(2,2, GameConstants.O_SIGN );
         boardWinO.setCellStatus(3,3, GameConstants.O_SIGN );
+        //then
         assertTrue(boardWinO.isWin(GameConstants.O_SIGN));
+        //given
         Board boardWinXAntiDiagonal = new Board();
         boardWinXAntiDiagonal.setCellStatus(1,3, GameConstants.X_SIGN );
         boardWinXAntiDiagonal.setCellStatus(2,2, GameConstants.X_SIGN );
         boardWinXAntiDiagonal.setCellStatus(3,1, GameConstants.X_SIGN );
+        //then
         assertTrue(boardWinXAntiDiagonal.isWin(GameConstants.X_SIGN));
 
 
@@ -82,6 +94,7 @@ class BoardTest {
     @Test
     void isDrawTest() {
         assertFalse(board.isDraw());
+        //given
         board.setCellStatus(1, 1, GameConstants.O_SIGN);
         board.setCellStatus(1, 2, GameConstants.X_SIGN);
         board.setCellStatus(1, 3, GameConstants.X_SIGN);
@@ -91,22 +104,28 @@ class BoardTest {
         board.setCellStatus(3, 1, GameConstants.X_SIGN);
         board.setCellStatus(3, 2, GameConstants.O_SIGN);
         board.setCellStatus(3, 3, GameConstants.X_SIGN);
+        //then
         assertTrue(board.isDraw());
     }
 
     @Test
     void checkGameStatusTest() {
         assertEquals(OutputMessages.GAME_NOT_FINISHED, Board.checkGameStatus(board));
+        //given
         Board boardWinXAntiDiagonal = new Board();
         boardWinXAntiDiagonal.setCellStatus(1,3, GameConstants.X_SIGN );
         boardWinXAntiDiagonal.setCellStatus(2,2, GameConstants.X_SIGN );
         boardWinXAntiDiagonal.setCellStatus(3,1, GameConstants.X_SIGN );
+        //then
         assertEquals(OutputMessages.X_WINS, Board.checkGameStatus(boardWinXAntiDiagonal));
+        //given
         Board boardWinO = new Board();
         boardWinO.setCellStatus(1,1, GameConstants.O_SIGN );
         boardWinO.setCellStatus(2,2, GameConstants.O_SIGN );
         boardWinO.setCellStatus(3,3, GameConstants.O_SIGN );
+        //then
         assertEquals(OutputMessages.O_WINS, Board.checkGameStatus(boardWinO));
+        //given
         board.setCellStatus(1, 1, GameConstants.O_SIGN);
         board.setCellStatus(1, 2, GameConstants.X_SIGN);
         board.setCellStatus(1, 3, GameConstants.X_SIGN);
@@ -116,6 +135,7 @@ class BoardTest {
         board.setCellStatus(3, 1, GameConstants.X_SIGN);
         board.setCellStatus(3, 2, GameConstants.O_SIGN);
         board.setCellStatus(3, 3, GameConstants.X_SIGN);
+        //then
         assertEquals(OutputMessages.DRAW, Board.checkGameStatus(board));
 
 
@@ -123,14 +143,19 @@ class BoardTest {
 
     @Test
     void clearCellTest() {
+        //given
         board.setCellStatus(2,2, GameConstants.X_SIGN);
+        //then
         assertEquals(GameConstants.X_SIGN ,board.getCellStatus(1,1));
+        //when
         board.clearCell(1,1);
+        //then
         assertEquals(GameConstants.EMPTY_SIGN ,board.getCellStatus(1,1));
     }
 
     @Test
     void printBoardTest() {
+        //given
         String pattern =
                 """
                         ---------
@@ -138,6 +163,7 @@ class BoardTest {
                         |       |
                         |       |
                         ---------""";
+        //then
         assertEquals(pattern, board.printBoard());
     }
 }

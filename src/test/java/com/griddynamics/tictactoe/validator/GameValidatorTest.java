@@ -21,7 +21,9 @@ class GameValidatorTest {
     @Test
     void validateCellAvailability() {
             assertTrue(GameValidator.validateCellAvailability(1, 1, this.board));
+            //given
             board.setCellStatus(1, 1, GameConstants.X_SIGN);
+            //then
             assertFalse(GameValidator.validateCellAvailability(1, 1, board));
       }
 

@@ -6,34 +6,20 @@ import com.griddynamics.tictactoe.messages.InputMessages;
 import com.griddynamics.tictactoe.messages.OutputMessages;
 import com.griddynamics.tictactoe.player.Player;
 import com.griddynamics.tictactoe.validator.InputValidator;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
 
+@Getter
 @Slf4j
+@AllArgsConstructor
 public class Game {
 
   private final Player player1;
   private final Player player2;
   private final Board board;
-
-  public Player getPlayer1() {
-    return player1;
-  }
-
-  public Player getPlayer2() {
-    return player2;
-  }
-
-  public Board getBoard() {
-    return board;
-  }
-
-  public Game(Player player1, Player player2, Board board) {
-    this.player1 = player1;
-    this.player2 = player2;
-    this.board = board;
-  }
 
   public static void main(String[] args) {
     start();

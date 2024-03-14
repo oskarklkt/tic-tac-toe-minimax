@@ -11,13 +11,11 @@ import java.util.Random;
 import static com.griddynamics.tictactoe.game.GameConstants.*;
 
 @Slf4j
+@Getter
 public class ComputerPlayer implements Player {
 
   private final Difficulty difficultyLevel;
-  @Getter
   public final char sign;
-
-  @Getter
   public final char oppositeSign;
 
   public ComputerPlayer(Difficulty difficultyLevel, char sign) {

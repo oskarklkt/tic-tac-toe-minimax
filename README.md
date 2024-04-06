@@ -1,97 +1,5 @@
 # Tic-Tac-Toe
 
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.griddynamics.net/pl-java-internship-2024-q1/tic-tac-toe.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.griddynamics.net/pl-java-internship-2024-q1/tic-tac-toe/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-
 ## Stage 1/5: Initial setup
 Description
 In this project, you'll write a game called Tic-Tac-Toe that you can play against your computer. The computer will have three levels of difficulty — easy, medium, and hard.
@@ -125,11 +33,77 @@ Display the table again with the user's most recent move included.
 Output the state of the game.
 The possible states are:
 
-Game not finished — when no side has three in a row, but the table still has empty cells;
+com.griddynamics.tictactoe.game.Game not finished — when no side has three in a row, but the table still has empty cells;
 Draw — when no side has three in a row, and the table is complete;
 X wins — when there are three X's in a row (up, down, across, or diagonally);
 O wins — when there are three O's in a row (up, down, across, or diagonally).
 If the user provides invalid coordinates, the program should repeat the request until numbers that represent an empty cell on the table are supplied. You should ensure that the program only outputs the table twice — before the move and after the user makes a legal move.
 
+## Stage 2/5: Easy does it
+Description
+Now it's time to make a working game, so let's create our first opponent! In this version of the program, the user will be playing as X, and the computer will be playing as O at easy level. This will be our first small step towards creating the AI!
 
+Let's design it so that at this level the computer makes random moves. This should be perfect for people who have never played the game before!
 
+If you want, you could make the game even simpler by including a difficulty level where the computer never wins. Feel free to create this along with the easy level if you like, but it won't be tested.
+
+Objectives
+In this stage, you should implement the following:
+
+Display an empty table when the program starts.
+The user plays first as X, and the program should ask the user to enter cell coordinates.
+Next, the computer makes its move as O, and the players then move in turn until someone wins or the game results in a draw.
+Print the final outcome at the very end of the game.
+
+## Stage 3/5: Watch 'em fight
+Description
+It's time to make things more interesting by adding some game variations. What if you want to play against a friend instead of the AI? How about if you get tired of playing the game and want to see a match between two AIs? You also need to give the user the option of going first or second when playing against the AI.
+
+It should be possible for the user to quit the game after the result is displayed as well.
+
+Objectives
+Your tasks for this stage are:
+
+Write a menu loop, which can interpret two commands: start and exit.
+Implement the command start. It should take two parameters: who will play X and who will play O. Two options are possible for now: user to play as a human, and easy to play as an AI.
+The exit command should simply end the program.
+In later steps, you will add the medium and hard levels.
+
+Don't forget to handle incorrect input! The message Bad parameters! should be displayed if what the user enters is invalid.
+
+## Stage 4/5: Signs of intelligence
+Description
+Let's write the medium difficulty level now. To do this, we need to add awareness to our AI.
+
+This level will be a lot harder to beat than easy, even though the initial moves are still random. When the AI is playing at medium level, it wins when it can because of its first rule, and stops all simple attempts to beat it due to its second.
+
+You can see these rules below.
+
+Objectives
+When the AI is playing at medium difficulty level, it makes moves using the following logic:
+
+If it already has two in a row and can win with one further move, it does so.
+If its opponent can win with one move, it plays the move necessary to block this.
+Otherwise, it makes a random move.
+You should add a medium parameter so that you can play against this level. It should also be possible to make AIs using easy and medium levels play against each other!
+
+## Stage 5/5: An undefeated champion
+Description
+Congratulations, you've almost reached the finish line! To complete the task, it's now time to turn the AI into a strong opponent by adding a hard difficulty level.
+
+Unlike medium, when the AI is playing at hard level, it doesn't just look one move ahead to see an immediate win or prevent an immediate loss. At this level, it can look two moves ahead, three moves ahead, and even further. It can calculate all possible moves that might be played during the game, and choose the best one based on the assumption that its opponent will also play perfectly. So, it doesn't rely on the mistakes of its opponent and plays the game without fault from start to finish regardless of the opponent's skill!
+
+The algorithm that implements this is called minimax. It's a recursive brute force algorithm that maximizes the value of the AI's position and minimizes the worth of its opponent's. Minimax is not just for Tic-Tac-Toe. You can use it with any other game where two players make alternate moves, such as chess.
+
+Objectives
+In this last stage, you need to implement the hard difficulty level using the minimax algorithm. As a recursive algorithm, it can be tricky to think about, so you should try to look at different resources to find the one that works best for your understanding (which is an important skill to get good at as you progress in you software development career!). Consider the following as starting points:
+
+Video-based explanations:
+"Tic Tac Toe AI with Minimax Algorithm" by The Coding Train
+"Algorithms Explained – minimax and alpha-beta pruning" by Sebastian Lague
+"Mega-R3. Games, Minimax, Alpha-Beta" from MIT OpenCourseWare
+Text-based explanations:
+"How to make your Tic Tac Toe game unbeatable by using the minimax algorithm" on freeCodeCamp.org
+"Case Study on Tic-Tac-Toe Part 2: With AI" from Nanyang Technological University
+"Tic Tac Toe - Creating Unbeatable AI" on Medium
+You should also add a hard parameter so that it's possible to play against this level.

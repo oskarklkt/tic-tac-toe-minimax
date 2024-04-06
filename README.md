@@ -107,3 +107,10 @@ Text-based explanations:
 "Case Study on Tic-Tac-Toe Part 2: With AI" from Nanyang Technological University
 "Tic Tac Toe - Creating Unbeatable AI" on Medium
 You should also add a hard parameter so that it's possible to play against this level.
+
+
+# Test Coverage
+
+<img width="1117" alt="Screenshot 2024-04-06 at 21 03 10" src="https://github.com/oskarklkt/tic-tac-toe-minimax/assets/117487714/44384b9c-74bf-49ff-bcab-ebe03d528afc">
+
+
